@@ -1,0 +1,84 @@
+<body style="align-content: center ; padding-left: 50%; ">
+   <table>
+    <h4>tic tac toe player x please click on the box </h4>
+    <h1 class="current-player"> Turn:</h1><h1> Turn:</h1>
+       <tr>
+           <td class="box" type="button" name="1" ></td>
+           <td class="box" type="button" name="2" ></td>
+           <td class="box" type="button" name="3" ></td>
+       </tr>
+       <tr>
+           <td class="box" type="button" name="4" ></td>
+           <td class="box" type="button" name="5" ></td>
+           <td class="box" type="button" name="6" ></td>
+       </tr>
+       <tr>
+           <td class="box" type="button" name="7" ></td>
+           <td class="box" type="button" name="8" ></td>
+           <td class="box" type="button" name="9" ></td>
+       </tr>
+
+       <style>
+           .box{
+               border: 1px solid black;
+               width: 50px;
+               height: 50px;
+               text-align: center;
+               
+           }
+       </style>
+       <script>
+        let  boxes = document.querySelectorAll(".box");
+        let currentPlayer = "";
+        if (currentPlayer === "") {
+            currentPlayer = Math.random() > 0.5 ? "X" : "O";
+        }
+        winningPatterns = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ]
+       
+        document.querySelector(".current-player").textContent = currentPlayer;
+         
+        let clickBox = document.querySelectorAll(".box");
+        clickBox.forEach((box, index) => {
+            box.addEventListener("click", () => {
+                if (box.textContent === "") {
+                    box.textContent = currentPlayer;
+                    if (currentPlayer === "X") {
+                        currentPlayer = "O";
+                    } else {
+                        currentPlayer = "X";
+
+                    }
+                    document.querySelector(".current-player").textContent = currentPlayer;
+                }
+                else {
+                    alert("box already clicked try again");
+                }
+                checkWin();
+            });
+        });
+        const checkWin = () => {
+            winningPatterns.forEach((pattern) => {
+                let position1 = boxes[pattern[0]].textContent;
+                let position2 = boxes[pattern[1]].textContent;
+                let position3 = boxes[pattern[2]].textContent;
+                if (position1 === position2 && position1 === position3 && position1 !== "") {
+                    alert("player " + position1 + " won");
+                }
+            })
+
+        }
+
+     
+
+        </script>
+
+</body>
